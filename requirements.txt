@@ -5,3 +5,5 @@ langchain-community
 langchain-core
 langchain-openai
 duckduckgo_search
+beautifulsoup4
+bs4

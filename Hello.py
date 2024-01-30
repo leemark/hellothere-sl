@@ -16,30 +16,31 @@ st.title('🐯 Ask a Tiger')
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 def generate_response(input_text):
-  # llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
   llm = ChatOpenAI(
     model_name="gpt-4-0125-preview",
     max_tokens=2048,
     temperature=0.9, 
     openai_api_key=openai_api_key
   )
+
   srch_query = f"{input_text} site:coloradocollege.edu"
   wrapper = DuckDuckGoSearchAPIWrapper(max_results=12)
   search = DuckDuckGoSearchResults(api_wrapper=wrapper, source="text")
   context = search.run(srch_query)
   links = re.findall(r'https?://\S+', context)
   cleaned_links = [link.rstrip("],") for link in links]
+
   loader_list = []
   for i in cleaned_links:
     loader_list.append(WebBaseLoader(i))
   index = VectorstoreIndexCreator().from_loaders(loader_list)
+  
   prompt = f'''
     You are a helpful assistant who is answering questions about Colorado College (aka CC). 
     Given all of the context, please provide a comprehensive answer to the user's question: {input_text} 
     Make sure that the answer would be helpful to a prospective student. 
   '''
-  #st.info(llm(input_text))
-  # st.info(prompt)
+
   ans = index.query(question=prompt, llm=llm)
   st.info(ans)
 

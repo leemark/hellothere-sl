@@ -7,3 +7,5 @@ langchain-openai
 duckduckgo_search
 beautifulsoup4
 bs4
+chroma-hnswlib
+chromadb

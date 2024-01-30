@@ -20,7 +20,7 @@ def generate_response(input_text):
   llm = ChatOpenAI(
     model_name="gpt-4-0125-preview",
     max_tokens=2048,
-    temperature=0.7, 
+    temperature=0.9, 
     openai_api_key=openai_api_key
   )
   srch_query = f"{input_text} site:coloradocollege.edu"
@@ -34,7 +34,7 @@ def generate_response(input_text):
     loader_list.append(WebBaseLoader(i))
   index = VectorstoreIndexCreator().from_loaders(loader_list)
   prompt = f'''
-    Given the context, please provide an answer to {input_text}
+    Given all of the context, please provide a comprehensive answer to: {input_text} 
   '''
   #st.info(llm(input_text))
   st.info(prompt)

@@ -11,7 +11,7 @@ from langchain_community.utilities import DuckDuckGoSearchAPIWrapper
 from langchain_community.document_loaders import WebBaseLoader 
 from langchain.indexes import VectorstoreIndexCreator
 
-st.title('🐯 Tiger Talk')
+st.title('🐯 Ask a Tiger')
 
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 
@@ -34,10 +34,10 @@ def generate_response(input_text):
     loader_list.append(WebBaseLoader(i))
   index = VectorstoreIndexCreator().from_loaders(loader_list)
   prompt = f'''
-    Given all of the context, please provide a comprehensive answer to: {input_text} 
+    Given all of the context, please provide a comprehensive answer to: {input_text} Make sure that the answer would be helpful to a prospective student. 
   '''
   #st.info(llm(input_text))
-  st.info(prompt)
+  # st.info(prompt)
   ans = index.query(question=prompt, llm=llm)
   st.info(ans)
 

@@ -34,7 +34,9 @@ def generate_response(input_text):
     loader_list.append(WebBaseLoader(i))
   index = VectorstoreIndexCreator().from_loaders(loader_list)
   prompt = f'''
-    Given all of the context, please provide a comprehensive answer to: {input_text} Make sure that the answer would be helpful to a prospective student. 
+    You are a helpful assistant who is answering questions about Colorado College (aka CC). 
+    Given all of the context, please provide a comprehensive answer to the user's question: {input_text} 
+    Make sure that the answer would be helpful to a prospective student. 
   '''
   #st.info(llm(input_text))
   # st.info(prompt)

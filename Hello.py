@@ -33,7 +33,7 @@ def generate_response(input_text):
   for i in cleaned_links:
     loader_list.append(WebBaseLoader(i))
   index = VectorstoreIndexCreator().from_loaders(loader_list)
-  prompt = '''
+  prompt = f'''
     Given the context, please provide an answer to {input_text}
   '''
   #st.info(llm(input_text))

@@ -31,7 +31,7 @@ def generate_response(input_text):
   '''
   #st.info(llm(input_text))
   print(prompt)
-  ans = index.query(question=query, llm=llm)
+  ans = index.query(question=prompt, llm=llm)
   st.info(ans)
 
 with st.form('my_form'):

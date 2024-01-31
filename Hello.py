@@ -6,14 +6,16 @@ import streamlit as st
 import re
 from langchain_openai import OpenAI
 from langchain_openai import ChatOpenAI
+from langchain_community.llms import DeepInfra
 from langchain_community.tools import DuckDuckGoSearchResults
 from langchain_community.utilities import DuckDuckGoSearchAPIWrapper
 from langchain_community.document_loaders import WebBaseLoader 
 from langchain.indexes import VectorstoreIndexCreator
 
-st.title('🐯 Ask a Tiger')
+st.title('🐯 Ask a Tiger.')
 
 openai_api_key = st.secrets["OPENAI_API_KEY"]
+DEEPINFRA_API_TOKEN = st.secrets["DEEPINFRA_API_TOKEN"]
 
 def generate_response(input_text):
   llm = ChatOpenAI(
@@ -22,7 +24,12 @@ def generate_response(input_text):
     temperature=0.9, 
     openai_api_key=openai_api_key
   )
-
+  llm_di = DeepInfra(model_id="mistralai/Mixtral-8x7B-Instruct-v0.1")
+  llm_di.model_kwargs = {
+      "temperature": 0.9,
+      "repetition_penalty": 1.2,
+      "max_new_tokens": 2048
+  }
   srch_query = f"{input_text} site:coloradocollege.edu"
   wrapper = DuckDuckGoSearchAPIWrapper(max_results=12)
   search = DuckDuckGoSearchResults(api_wrapper=wrapper, source="text")
@@ -41,7 +48,7 @@ def generate_response(input_text):
     Make sure that the answer would be helpful to a prospective student. 
   '''
 
-  ans = index.query(question=prompt, llm=llm)
+  ans = index.query(question=prompt, llm=llm_di)
   st.info(ans)
 
 with st.form('my_form'):

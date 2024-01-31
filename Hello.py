@@ -19,7 +19,7 @@ DEEPINFRA_API_TOKEN = st.secrets["DEEPINFRA_API_TOKEN"]
 
 def generate_response(input_text):
   llm = ChatOpenAI(
-    model_name="gpt-4-0125-preview",
+    model_name="gpt-3.5-turbo-1106",
     max_tokens=2048,
     temperature=0.9, 
     openai_api_key=openai_api_key
@@ -49,7 +49,7 @@ def generate_response(input_text):
     Make sure that the answer would be helpful to a prospective student. 
   '''
 
-  ans = index.query(question=prompt, llm=llm_di)
+  ans = index.query(question=prompt, llm=llm)
   st.info(ans)
 
 with st.form('my_form'):

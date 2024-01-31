@@ -32,6 +32,7 @@ def generate_response(input_text):
       "top_p": 0.9
   }
   llm_query = llm_di(f"Given the following question, what search query would you use to search for the answer? Respond only with the search query, nothing else. QUESTION: {input_text}")
+  st.info(llm_query)
   srch_query = f"{llm_query} site:coloradocollege.edu"
   wrapper = DuckDuckGoSearchAPIWrapper(max_results=12)
   search = DuckDuckGoSearchResults(api_wrapper=wrapper, source="text")

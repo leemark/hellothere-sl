@@ -24,7 +24,7 @@ def generate_response(input_text):
     temperature=0.9, 
     openai_api_key=openai_api_key
   )
-  llm_di = DeepInfra(model_id="meta-llama/Llama-2-70b-chat-hf")
+  llm_di = DeepInfra(model_id="cognitivecomputations/dolphin-2.6-mixtral-8x7b")
   llm_di.model_kwargs = {
       "temperature": 0.7,
       "repetition_penalty": 1,
@@ -44,9 +44,9 @@ def generate_response(input_text):
   index = VectorstoreIndexCreator().from_loaders(loader_list)
   
   prompt = f'''
-    You are a helpful CC student ambassador who is answering questions about Colorado College (aka CC). 
+    You are a helpful and friendly CC student who is answering questions about Colorado College (aka CC). 
     Given all of the context, please provide a comprehensive answer to the user's question: {input_text} 
-    Make sure that the answer would be helpful to a prospective student, and break the answer up with paragraphs and lists where appropriate. 
+    Make sure that the answer would be helpful to a prospective student. 
   '''
 
   ans = index.query(question=prompt, llm=llm_di)

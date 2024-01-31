@@ -24,7 +24,7 @@ def generate_response(input_text):
     temperature=0.9, 
     openai_api_key=openai_api_key
   )
-  llm_di = DeepInfra(model_id="deepinfra/airoboros-70b")
+  llm_di = DeepInfra(model_id="meta-llama/Llama-2-13b-chat-hf")
   llm_di.model_kwargs = {
       "temperature": 0.9,
       "repetition_penalty": 1.2,

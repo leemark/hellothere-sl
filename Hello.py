@@ -24,11 +24,12 @@ def generate_response(input_text):
     temperature=0.9, 
     openai_api_key=openai_api_key
   )
-  llm_di = DeepInfra(model_id="meta-llama/Llama-2-13b-chat-hf")
+  llm_di = DeepInfra(model_id="meta-llama/Llama-2-70b-chat-hf")
   llm_di.model_kwargs = {
-      "temperature": 0.9,
-      "repetition_penalty": 1.2,
-      "max_new_tokens": 2048
+      "temperature": 0.7,
+      "repetition_penalty": 1,
+      "max_new_tokens": 2048,
+      "top_p": 0.9,
   }
   srch_query = f"{input_text} site:coloradocollege.edu"
   wrapper = DuckDuckGoSearchAPIWrapper(max_results=12)

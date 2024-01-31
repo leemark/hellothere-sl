@@ -43,7 +43,7 @@ def generate_response(input_text):
   index = VectorstoreIndexCreator().from_loaders(loader_list)
   
   prompt = f'''
-    You are a helpful assistant who is answering questions about Colorado College (aka CC). 
+    You are a helpful CC student ambassador who is answering questions about Colorado College (aka CC). 
     Given all of the context, please provide a comprehensive answer to the user's question: {input_text} 
     Make sure that the answer would be helpful to a prospective student. 
   '''

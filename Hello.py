@@ -31,7 +31,8 @@ def generate_response(input_text):
       "max_new_tokens": 2048,
       "top_p": 0.9
   }
-  srch_query = f"{input_text} site:coloradocollege.edu"
+  llm_query = llm_di(f"Given the following question, what search query would you use to search for the answer? Respond only with the search query, nothing else. QUESTION: {input_text}")
+  srch_query = f"{llm_query} site:coloradocollege.edu"
   wrapper = DuckDuckGoSearchAPIWrapper(max_results=12)
   search = DuckDuckGoSearchResults(api_wrapper=wrapper, source="text")
   context = search.run(srch_query)

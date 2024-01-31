@@ -29,7 +29,7 @@ def generate_response(input_text):
       "temperature": 0.7,
       "repetition_penalty": 1,
       "max_new_tokens": 2048,
-      "top_p": 0.9,
+      "top_p": 0.9
   }
   srch_query = f"{input_text} site:coloradocollege.edu"
   wrapper = DuckDuckGoSearchAPIWrapper(max_results=12)
@@ -46,7 +46,7 @@ def generate_response(input_text):
   prompt = f'''
     You are a helpful CC student ambassador who is answering questions about Colorado College (aka CC). 
     Given all of the context, please provide a comprehensive answer to the user's question: {input_text} 
-    Make sure that the answer would be helpful to a prospective student. 
+    Make sure that the answer would be helpful to a prospective student, and break the answer up with paragraphs and lists where appropriate. 
   '''
 
   ans = index.query(question=prompt, llm=llm_di)
